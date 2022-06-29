@@ -1,6 +1,7 @@
 #import a lot of trash
 import json
 from shutil import move, Error
+from time import sleep
 import requests
 import re
 import zipfile
@@ -54,7 +55,7 @@ else:
 if idExists(argv):
     if argv[1].startswith("-"):
         if argv[1] == "-help":
-            print("list of command:\n -about about the apps\n -f <file> decompile the modpack as folder(without version.jar)\n -help  print the list")
+            print("list of command:\n -about about the apps\n -f <file> decompile the modpack as instance(without version.jar)\n -help  print the list")
         if argv[1] == "-about":
             sajh("https://youtu.be/dQw4w9WgXcQ")
         if argv[1] == "-f":
@@ -91,20 +92,21 @@ if idExists(argv):
                 for file in sa.namelist():
                     if file.startswith(f"{ls['overrides']}/"):
                         sa.extract(file, f'{ls["overrides"]}/')
-                alls = listdir(ls['overrides'])
+                alls = listdir(f"{ls['overrides']}/{ls['overrides']}")
                 print(alls)
                 for one in alls:
                     try:
                         print(f"{one} => {fuak}")
-                        move(f"{ls['overrides']}/" + one, f"{fuak}/")
+                        move(f"{ls['overrides']}/{ls['overrides']}/" + one, f"{fuak}/")
                     except Error:
                         pass
                 print("modpack need modloader to launch,\n the app can't automatic download modloader.\nplease manually download modloader")
                 la = ls['minecraft']['modLoaders']
                 print(f"modloader:{la}\nversion: {ls['minecraft']['version']}")
+                sleep(1)
+                rmdir(f"{ls['overrides']}/{ls['overrides']}")
+                sleep(1)
                 rmdir(ls['overrides'])
-
-                
         
                 
             else:
