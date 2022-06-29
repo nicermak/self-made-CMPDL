@@ -54,7 +54,7 @@ else:
 if idExists(argv):
     if argv[1].startswith("-"):
         if argv[1] == "-help":
-            print("list of command:\n -about about the apps\n -f <file> decompile the modpack as instance(without version.jar)\n -help  print the list")
+            print("list of command:\n -about about the apps\n -f <file> decompile the modpack as folder(without version.jar)\n -help  print the list")
         if argv[1] == "-about":
             sajh("https://youtu.be/dQw4w9WgXcQ")
         if argv[1] == "-f":
