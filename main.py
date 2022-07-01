@@ -2,6 +2,7 @@
 import json
 from shutil import move, Error
 from time import sleep
+from tkinter.messagebox import YES
 import requests
 import re
 import zipfile
@@ -89,25 +90,32 @@ if idExists(argv):
                         print(f'[Error]files {oa} is missing download url')
                         ja = ja + 1
                         continue
-                for file in sa.namelist():
-                    if file.startswith(f"{ls['overrides']}/"):
-                        sa.extract(file, f'{ls["overrides"]}/')
-                alls = listdir(f"{ls['overrides']}/{ls['overrides']}")
-                print(alls)
-                for one in alls:
-                    try:
-                        print(f"{one} => {fuak}")
-                        move(f"{ls['overrides']}/{ls['overrides']}/" + one, f"{fuak}/")
-                    except Error:
-                        pass
+                try:
+                    print(f"try to open {ls['overrides']}")
+                    for file in sa.namelist():
+                        if file.startswith(f"{ls['overrides']}/"):
+                            sa.extract(file, f'{ls["overrides"]}/')
+                    alls = listdir(f"{ls['overrides']}/{ls['overrides']}")
+                    print(alls)
+                    for one in alls:
+                        try:
+                            print(f"{one} => {fuak}")
+                            move(f"{ls['overrides']}/{ls['overrides']}/" + one, f"{fuak}/")
+                        except Error:
+                            pass
+
+                    sleep(1)
+                    rmdir(f"{ls['overrides']}/{ls['overrides']}")
+                    sleep(1)
+                    rmdir(ls['overrides'])
+                except KeyError:
+                    print("Overrides didn't exist")
+                    pass
+                except FileNotFoundError:
+                    print("override didn't exist, but it exist in manifest, check your modpack are somthing is missing?")
                 print("modpack need modloader to launch,\n the app can't automatic download modloader.\nplease manually download modloader")
                 la = ls['minecraft']['modLoaders']
                 print(f"modloader:{la}\nversion: {ls['minecraft']['version']}")
-                sleep(1)
-                rmdir(f"{ls['overrides']}/{ls['overrides']}")
-                sleep(1)
-                rmdir(ls['overrides'])
-        
                 
             else:
                 print("zip isn't exist")
