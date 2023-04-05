@@ -9,9 +9,13 @@ import zipfile
 from webbrowser import open_new_tab as sajh
 from os import path, makedirs, rmdir, replace, listdir, rename, rmdir
 from sys import argv
-
+print(argv[0], argv[1])
 #var
-fuak = str(argv[2]).replace(".zip", "")
+try:
+    fuak = str(argv[2]).replace(".zip", "")
+except IndexError:
+    print("[Error] No argv[2]")
+
 #fun
 def gffcd(cd):
     if not cd:
@@ -29,11 +33,6 @@ def dfile(url, header, name):
     except FileNotFoundError:
         makedirs(fuak)
         makedirs(f'{fuak}\mods')
-def idExists(object):
-    if len(object) == 1:
-        return False
-    else:
-        return True
 #code
 if path.exists('token.json'):
     aasja = open('token.json', encoding='utf-8', mode='r+')
@@ -53,7 +52,8 @@ else:
     aldgjh = open('token.json', encoding='utf-8', mode='w')
     print("token.json doesn't exist,\ncreating new one,\nyou can find 'API_KEY' in:\nhttps://console.curseforge.com/?#/api-keys")
     aldgjh.write('{\n    "API_KEY":""\n}')
-if idExists(argv):
+try:
+    ahfdyujashdfjuhyasqgs = argv[1]
     if argv[1].startswith("-"):
         if argv[1] == "-help":
             print("list of command:\n -about about the apps\n -f <file> decompile the modpack as instance(without version.jar)\n -help  print the list")
@@ -121,5 +121,5 @@ if idExists(argv):
                 print("zip isn't exist")
     else:
         print('type -help for list of commands')
-else:
+except IndexError:
     print('type -help for list of commands')
