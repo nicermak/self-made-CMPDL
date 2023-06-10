@@ -12,4 +12,4 @@ https://console.curseforge.com/?#/api-keys)
 cmpdl -f <Modpack.zip>
 ```
 4. now mods was download in `.\<Modpack>` now,
-drag everything in the folder to `%appdata%\minecraft` and enjoy modpacks!
+drag everything in the folder to `%appdata%\.minecraft` and enjoy modpacks!
